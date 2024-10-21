@@ -1,20 +1,24 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import TravelListPage from "./pages/TravelListPage"
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <TravelListPage />,
-  },
-  {
-    path: "test",
-    element: <div>test</div>
-  }
-]);
-
+import TravelSinglePage from "./pages/TravelSinglePage";
 
 function App() {
-  return ( <RouterProvider router={router} /> )
+  return (
+    <div>
+      <BrowserRouter>
+        <nav className="flex justify-between items-center p-4 bg-red-400 text-white">
+          <Link to="/">Home</Link>
+        </nav>
+
+        <div className="container mx-auto mt-10">
+          <Routes>
+            <Route path='/' element={<TravelListPage />} />
+            <Route path='/:id' element={<TravelSinglePage />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </div>
+  )
 }
 
 export default App
