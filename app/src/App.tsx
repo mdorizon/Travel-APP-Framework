@@ -1,10 +1,20 @@
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import TravelListPage from "./pages/TravelListPage"
 
-function App() {
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <TravelListPage />,
+  },
+  {
+    path: "test",
+    element: <div>test</div>
+  }
+]);
 
-  return (
-    <TravelListPage />
-  )
+
+function App() {
+  return ( <RouterProvider router={router} /> )
 }
 
 export default App
