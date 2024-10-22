@@ -5,7 +5,9 @@ const app = express()
 const port = 8000
 
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+    origin: 'http://localhost:5173'
+}))
 
 const travelList = 
 [
@@ -50,7 +52,7 @@ app.post('/travels', (req: Request, res: Response) => {
     // Get data body
     const travel = req.body
     // Create id
-    const id = (travelList.length + 1)
+    const id = (travelList.length + 10)
     travel.id = id;
     // Add data body into array
     travelList.push(travel)
@@ -74,12 +76,14 @@ app.put('/travels/:id', (req: Request, res: Response) => {
 //Delete travel (app.delete)
 app.delete('/travels/:id', (req: Request, res: Response) => {
     const { id } = req.params
-
     const index = travelList.findIndex(t => t.id === Number(id));
-    if (index !== -1) {
-        travelList.splice(index, 1); // Supprime l'élément à l'index trouvé
+
+    if(index === -1){
+        res.status(404).send({ message: `Error travel with id ${id} not found` })
     }
-    res.status(204)
+
+    travelList.splice(index, 1); // Supprime l'élément à l'index trouvé
+    res.status(204).send()
 })
 
 
