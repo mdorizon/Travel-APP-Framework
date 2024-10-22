@@ -2,6 +2,8 @@ import express, { Request, Response } from "express";
 const app = express()
 const port = 8000
 
+app.use(express.json())
+
 const travelList = 
 [
     {
@@ -32,15 +34,52 @@ app.get('/travels', (req: Request, res: Response) => {
 })
 
 //get one travel (app.get)
-app.get('/travel/:id', (req: Request, res: Response) => {
-    res.send(travelList.find(({id}) => id === Number(req.params.id)))
+app.get('/travels/:id', (req: Request, res: Response) => {
+    const travel = travelList.find(({ id }) => id === Number(req.params.id));
+    if (!travel) {
+        res.status(404).send({ message: "Travel not found" });
+    }
+    res.send(travel);
 })
 
 //create travel (app.post)
+app.post('/travels', (req: Request, res: Response) => {
+    // Get data body
+    const travel = req.body
+    // Create id
+    const id = (travelList.length + 1)
+    travel.id = id;
+    // Add data body into array
+    travelList.push(travel)
+    // Send data created
+    res.send(travel)
+})
 
 //Update travel (app.put)
+app.put('/travels/:id', (req: Request, res: Response) => {
+    const { id } = req.params
+    const updateTravelData = req.body
+    const index = travelList.findIndex(t => t.id === Number(id));
+    travelList[index] = {
+        ...travelList[index],
+        ...updateTravelData
+    }
+    
+    res.send(travelList)
+})
 
 //Delete travel (app.delete)
+app.delete('/travels/:id', (req: Request, res: Response) => {
+    const { id } = req.params
+
+    const index = travelList.findIndex(t => t.id === Number(id));
+    if (index !== -1) {
+        travelList.splice(index, 1); // Supprime l'élément à l'index trouvé
+    }
+    res.status(204)
+})
+
+
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
