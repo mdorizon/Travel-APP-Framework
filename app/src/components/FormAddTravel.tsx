@@ -1,7 +1,13 @@
 import { useState } from "react";
+import { TravelDTO } from "../types/travel.type";
+import { toast } from "sonner";
 
-const FormAddTravel = () => {
-    const [credentials, setCredentials] = useState({
+type FormAddTravelProps = {
+    fetchTravels: () => void
+}
+
+const FormAddTravel = ({ fetchTravels }: FormAddTravelProps) => {
+    const [credentials, setCredentials] = useState<TravelDTO>({
         name: '',
         city: '',
         country: '',
@@ -21,14 +27,15 @@ const FormAddTravel = () => {
                 body: JSON.stringify(credentials)
             });
             const data = await response.json()
+            toast.success('travel created !')
             console.log(data)
-            window.location.reload();
+            fetchTravels()
         } catch (e) {
             console.log(e)
         }
     }
 
-    const handleChange = (e: React.ChangeEvent<any>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setCredentials({
             ...credentials,

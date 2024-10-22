@@ -18,8 +18,8 @@ const CardTravel = ({ travel }: CardTravelProps) => {
                     <h2 className="text-xl text-zinc-500 fond-bold mt-2">{travel.name}</h2>
                 </Link>
                 <p>
-                    {travel.description.substring(0, 50)}
-                    {travel.description.length > 50 && "..."}
+                    {travel?.description?.substring(0, 50)}
+                    {travel?.description?.length > 50 && "..."}
                 </p>
             </div>
         </div>
