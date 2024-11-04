@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { TravelDTO } from "../types/travel.type";
 import { toast } from "sonner";
+import { create } from "../services/travel.service";
 
 type FormAddTravelProps = {
     fetchTravels: () => void
@@ -17,21 +18,15 @@ const FormAddTravel = ({ fetchTravels }: FormAddTravelProps) => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        
+
         try {
-            const response = await fetch(`http://localhost:8000/travels`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(credentials)
-            });
-            const data = await response.json()
+            const response = await create(credentials)
             toast.success('travel created !')
-            console.log(data)
+            console.log(response)
             fetchTravels()
-        } catch (e) {
-            console.log(e)
+        } catch (error) {
+            toast.error('Error to create travel !')
+            console.log('Error to create travel !', error)
         }
     }
 

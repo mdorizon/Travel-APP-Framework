@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { TravelType } from "../types/travel.type";
+import { findOneById, remove } from "../services/travel.service";
 
 const TravelSinglePage = () => {
     const { id } = useParams()
@@ -8,23 +9,25 @@ const TravelSinglePage = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        fetchTravels()
+        if(id) fetchTravel()
     }, [])
 
-    const fetchTravels = async () => {
-        const response = await fetch(`http://localhost:8000/travels/${id}`)
-        const data = await response.json()
-        setTravel(data)
+    const fetchTravel = async () => {
+        try {
+            const travel = await findOneById(id as string)
+            setTravel(travel);
+        } catch (error) {
+            console.log('Error to fetch travels', error)
+        }
     }
 
     const handleDelete = async () => {
         try {
-            await fetch(`http://localhost:8000/travels/${id}`, {
-                method: "DELETE"
-            })
+            const response = await remove(id as string)
+            console.log(response)
             navigate('/')
-        } catch (e) {
-            console.log(e)
+        } catch (error) {
+            console.log('Error to fetch travels', error)
         }
     }
 
