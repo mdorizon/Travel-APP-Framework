@@ -15,7 +15,7 @@ const TravelSinglePage = () => {
     const fetchTravel = async () => {
         try {
             const travel = await findOneById(id as string)
-            setTravel(travel[0]);
+            setTravel(travel);
         } catch (error) {
             console.log('Error to fetch travels', error)
         }
@@ -35,7 +35,7 @@ const TravelSinglePage = () => {
     return (
         <div>
             <img src={travel.image} />
-            <h1>{travel.name}</h1>
+            <h1>{travel.title}</h1>
 
             <button 
                 className="bg-red-400 text-white text-xl px-4 py-2 hover:bg-red-500 transition-all" 

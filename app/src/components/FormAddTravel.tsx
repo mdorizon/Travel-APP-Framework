@@ -9,7 +9,7 @@ type FormAddTravelProps = {
 
 const FormAddTravel = ({ fetchTravels }: FormAddTravelProps) => {
     const [credentials, setCredentials] = useState<TravelDTO>({
-        name: '',
+        title: '',
         city: '',
         country: '',
         image: '',
@@ -40,7 +40,7 @@ const FormAddTravel = ({ fetchTravels }: FormAddTravelProps) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <input onChange={handleChange} type="text" name="name" placeholder="Travel name" />
+            <input onChange={handleChange} type="text" name="title" placeholder="Travel name" />
             <input onChange={handleChange} type="text" name="city" placeholder="City name" />
             <input onChange={handleChange} type="text" name="country" placeholder="Country name" />
             <input onChange={handleChange} type="url" name="image" placeholder="Image URL" />
