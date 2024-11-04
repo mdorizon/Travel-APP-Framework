@@ -15,7 +15,7 @@ const TravelSinglePage = () => {
     const fetchTravel = async () => {
         try {
             const travel = await findOneById(id as string)
-            setTravel(travel);
+            setTravel(travel[0]);
         } catch (error) {
             console.log('Error to fetch travels', error)
         }
