@@ -96,19 +96,26 @@ app.put("/travels/:id", (req: Request, res: Response) => {
                 ...currentTravel,
                 ...req.body,
                 };
-                updateRequest(newTravel);
+
+                const sqlUpdate = 'UPDATE travel SET title=?, city=?, country=?, image=?, description=? WHERE id = ?';
+                const values = [
+                    newTravel.title, 
+                    newTravel.city, 
+                    newTravel.country, 
+                    newTravel.image, 
+                    newTravel.description, 
+                    id
+                ]
+                connection.query(sqlUpdate, values, (error, results) => {
+                    if (error) {
+                        res.status(500).send({ error: 'Error while fecthing data' });
+                        return;
+                    };
+                    res.status(200).send({ message: "Travel updated successfully" });
+                });
             }
         }
     );
-    function updateRequest(travel:any) {
-        connection.query('UPDATE travel SET title=?, city=?, country=?, image=?, description=? WHERE id = ?', [travel.title, travel.city, travel.country, travel.image, travel.description, id], function (error, results) {
-            if (error) {
-                res.status(500).send({ error: 'Error while fecthing data' });
-                return;
-            };
-            res.status(200).send({ message: "Travel updated successfully" });
-        });
-    }
 });
 
 //Delete travel (app.delete)
