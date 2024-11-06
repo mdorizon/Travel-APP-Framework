@@ -169,7 +169,15 @@ app.get('/categories/:id', (req, res) => {
             return;
         };
 
-        res.status(200).send(results);
+        if (Array.isArray(results) && results.length === 0) {
+            res.status(404).send({ error: "Category not found" });
+            return;
+        }
+
+        if (Array.isArray(results) && results.length === 1) {
+            res.status(200).send(results[0]);
+            return;
+        }
     });
 })
 
