@@ -1,8 +1,8 @@
 import { useState } from "react";
-import FormTravel from "../components/FormTravel";
-import TravelList from "../components/TravelList";
-import { TravelType } from "../types/travel.type";
-import { findAll } from "../services/travel.service";
+import FormTravel from "../../components/travel/FormTravel";
+import TravelList from "../../components/travel/TravelList";
+import { TravelType } from "../../types/travel.type";
+import { findAll } from "../../services/travel.service";
 
 const TravelListPage = () => {
     const [travelList, setTravelList] = useState<TravelType[]>([])

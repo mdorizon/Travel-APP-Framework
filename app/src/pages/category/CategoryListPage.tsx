@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { CategoryType } from "../types/category.type";
-import { findAllCategories } from "../services/category.service";
-import CategoryList from "../components/CategoryList";
-import FormCategory from "../components/FormCategory";
+import { CategoryType } from "../../types/category.type";
+import { findAllCategories } from "../../services/category.service";
+import CategoryList from "../../components/category/CategoryList";
+import FormCategory from "../../components/category/FormCategory";
 
 const CategoryListPage = () => {
   const [categoryList, setCategoryList] = useState<CategoryType[]>([])

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { CategoryDTO } from "../types/category.type";
+import { CategoryDTO } from "../../types/category.type";
 import { useNavigate, useParams } from "react-router-dom";
-import { createCategory, findOneCategoryById, updateCategory } from "../services/category.service";
+import { createCategory, findOneCategoryById, updateCategory } from "../../services/category.service";
 import { toast } from "sonner";
-import Input from "./Input";
-import Button from "./Button";
+import Input from "../ui/Input";
+import Button from "../ui/Button";
 
 type FormCategoryProps = {
     fetchCategories?: () => void

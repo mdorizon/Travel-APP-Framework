@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { CategoryType } from "../types/category.type";
+import { CategoryType } from "../../types/category.type";
 import CardCategory from "./CardCategory";
 
 type CategoryListProps = {

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
-import { CategoryType } from "../types/category.type"
-import { findOneCategoryById, removeCategory } from "../services/category.service"
+import { CategoryType } from "../../types/category.type"
+import { findOneCategoryById, removeCategory } from "../../services/category.service"
 import { toast } from "sonner"
-import Button from "../components/Button"
+import Button from "../../components/ui/Button"
 
 const CategorySinglePage = () => {
   const { id } = useParams()

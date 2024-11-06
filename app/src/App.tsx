@@ -1,11 +1,11 @@
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
-import TravelListPage from "./pages/TravelListPage"
-import TravelSinglePage from "./pages/TravelSinglePage";
+import TravelListPage from "./pages/travel/TravelListPage"
+import TravelSinglePage from "./pages/travel/TravelSinglePage";
 import { Toaster } from "sonner";
-import TravelEditPage from "./pages/TravelEditPage";
-import CategoryListPage from "./pages/CategoryListPage";
-import CategorySinglePage from "./pages/CategorySinglePage";
-import CategoryEditPage from "./pages/CategoryEditPage";
+import TravelEditPage from "./pages/travel/TravelEditPage";
+import CategoryListPage from "./pages/category/CategoryListPage";
+import CategorySinglePage from "./pages/category/CategorySinglePage";
+import CategoryEditPage from "./pages/category/CategoryEditPage";
 
 function App() {
   return (

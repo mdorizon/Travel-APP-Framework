@@ -1,7 +1,7 @@
 
 import { useEffect } from "react"
 import CardTravel from "./CardTravel"
-import { TravelType } from "../types/travel.type"
+import { TravelType } from "../../types/travel.type"
 
 type TravelListProps = {
     travelList: TravelType[],

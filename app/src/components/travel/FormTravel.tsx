@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { TravelDTO } from "../types/travel.type";
+import { TravelDTO } from "../../types/travel.type";
 import { toast } from "sonner";
-import { create, findOneById, update } from "../services/travel.service";
+import { create, findOneById, update } from "../../services/travel.service";
 import { useNavigate, useParams } from "react-router-dom";
-import Button from "./Button";
-import Input from "./Input";
+import Button from "../ui/Button";
+import Input from "../ui/Input";
 
 type FormTravelProps = {
     fetchTravels?: () => void

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { TravelType } from "../types/travel.type";
-import { findOneById, remove } from "../services/travel.service";
-import Button from "../components/Button";
+import { TravelType } from "../../types/travel.type";
+import { findOneById, remove } from "../../services/travel.service";
+import Button from "../../components/ui/Button";
 import { toast } from "sonner";
 
 const TravelSinglePage = () => {

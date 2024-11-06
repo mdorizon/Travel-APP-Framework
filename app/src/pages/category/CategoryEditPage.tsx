@@ -1,4 +1,4 @@
-import FormCategory from "../components/FormCategory";
+import FormCategory from "../../components/category/FormCategory";
 
 
 const CategoryEditPage = () => {
