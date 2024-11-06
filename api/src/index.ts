@@ -148,6 +148,111 @@ app.delete('/travels/:id', (req: Request, res: Response) => {
     }
 })
 
+// Get all categories
+app.get('/categories', (req, res) => {
+    connection.query('SELECT * FROM category', (e, results) => {
+        if (e) {
+            res.status(500).send({ error: 'Error while fecthing data' });
+            return;
+        };
+
+        res.status(200).send(results);
+    });
+})
+
+// Get one category
+app.get('/categories/:id', (req, res) => {
+    const id = req.params.id
+    connection.query('SELECT * FROM category WHERE id = ?', [id], (e, results) => {
+        if (e) {
+            res.status(500).send({ error: 'Error while fecthing data' });
+            return;
+        };
+
+        res.status(200).send(results);
+    });
+})
+
+//create category (app.post)
+app.post('/categories', (req: Request, res: Response) => {
+    const { name, description } = req.body;
+    connection.query('INSERT INTO category (name, description) VALUES (?, ?)', [name, description], (e, results) => {
+        if (e) {
+            res.status(500).send({ error: 'Error while fecthing data' });
+            return;
+        };
+        res.status(200).send({ message: "Category created successfully" });
+    });
+})
+
+//Update category (app.put)
+app.put("/categories/:id", (req: Request, res: Response) => {
+    const { id } = req.params;
+
+    connection.query("SELECT * FROM category WHERE id = ?", [id], (e, results) => {
+            if (e) {
+                res.status(500).send({ error: "Error while fetching data" });
+                return;
+            }
+            if (Array.isArray(results) && results.length === 0) {
+                res.status(404).send({ error: "Category not found" });
+                return;
+            }
+
+            if (Array.isArray(results) && results.length === 1) {
+                const currentCategory = results[0];
+                const newCategory = {
+                ...currentCategory,
+                ...req.body,
+                };
+
+                const sqlUpdate = 'UPDATE category SET name=?, description=? WHERE id = ?';
+                const values = [
+                    newCategory.name, 
+                    newCategory.description, 
+                    id
+                ]
+                connection.query(sqlUpdate, values, (e, results) => {
+                    if (e) {
+                        res.status(500).send({ error: 'Error while fecthing data' });
+                        return;
+                    };
+                    res.status(200).send({ message: "Category updated successfully" });
+                });
+            }
+        }
+    );
+});
+
+//Delete category (app.delete)
+app.delete('/categories/:id', (req: Request, res: Response) => {
+    const id = req.params.id;
+
+    // Vérifier si l'id existe dans la base de données
+    connection.query("SELECT * FROM category WHERE id = ?", [id], (e, results) => {
+        if (e) {
+            res.status(500).send({ error: 'Error while fecthing data' });
+            return;
+        };
+        if (Array.isArray(results) && results.length === 0) {
+            res.status(404).send({ error: "Category not found" });
+            return;
+        };
+        idFoundDelete();
+    });
+
+    // Si l'id existe on peut supprimer
+    function idFoundDelete() {
+        connection.query('DELETE FROM category WHERE id = ?', [id], (e) => {
+            if (e) {
+                res.status(500).send({ error: 'Error while fecthing data' });
+                return;
+            };
+    
+            res.status(200).send({ message: 'Success to delete' });
+        });
+    }
+})
 
 
 app.listen(port, () => {
