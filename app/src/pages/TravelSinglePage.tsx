@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { TravelType } from "../types/travel.type";
 import { findOneById, remove } from "../services/travel.service";
+import Button from "../components/Button";
+import { toast } from "sonner";
 
 const TravelSinglePage = () => {
     const { id } = useParams()
@@ -25,8 +27,10 @@ const TravelSinglePage = () => {
         try {
             const response = await remove(id as string)
             console.log(response)
+            toast.success('travel deleted !')
             navigate('/')
         } catch (error) {
+            toast.error('failed to delete travel !')
             console.log('Error to fetch travels', error)
         }
     }
@@ -36,13 +40,14 @@ const TravelSinglePage = () => {
         <div>
             <img src={travel.image} />
             <h1>{travel.title}</h1>
+            <Link to={`/edit/${id}`}>Editer</Link>
 
-            <button 
-                className="bg-red-400 text-white text-xl px-4 py-2 hover:bg-red-500 transition-all" 
+            <Button
+                text="Delete"
+                variant="danger"
                 onClick={handleDelete}
             >
-                Delete
-            </button>
+            </Button>
         </div>
     );
 }

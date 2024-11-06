@@ -1,6 +1,8 @@
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import TravelListPage from "./pages/TravelListPage"
 import TravelSinglePage from "./pages/TravelSinglePage";
+import { Toaster } from "sonner";
+import TravelEditPage from "./pages/TravelEditPage";
 
 function App() {
   return (
@@ -14,7 +16,9 @@ function App() {
           <Routes>
             <Route path='/' element={<TravelListPage />} />
             <Route path='/:id' element={<TravelSinglePage />} />
+            <Route path='/edit/:id' element={<TravelEditPage />} />
           </Routes>
+          <Toaster richColors position="bottom-right" />
         </div>
       </BrowserRouter>
     </div>

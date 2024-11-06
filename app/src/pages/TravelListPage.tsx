@@ -1,8 +1,7 @@
 import { useState } from "react";
-import FormAddTravel from "../components/FormAddTravel";
+import FormTravel from "../components/FormTravel";
 import TravelList from "../components/TravelList";
 import { TravelType } from "../types/travel.type";
-import { Toaster } from "sonner";
 import { findAll } from "../services/travel.service";
 
 const TravelListPage = () => {
@@ -21,10 +20,9 @@ const TravelListPage = () => {
         <div>
             <h1 className="text-4xl text-red-400 mb-10">Share your travel</h1>
 
-            <FormAddTravel fetchTravels={fetchTravels} />
+            <FormTravel fetchTravels={fetchTravels} />
 
             <TravelList travelList={travelList} fetchTravels={fetchTravels} />
-            <Toaster richColors position="bottom-right" />
         </div>
     );
 }
