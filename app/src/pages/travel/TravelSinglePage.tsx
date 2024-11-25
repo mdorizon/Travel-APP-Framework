@@ -4,6 +4,8 @@ import { TravelType } from "../../types/travel.type";
 import { findOneById, remove } from "../../services/travel.service";
 import Button from "../../components/ui/Button";
 import { toast } from "sonner";
+import CommentList from "../../components/comment/CommentList";
+import CommentForm from "../../components/comment/CommentForm";
 
 const TravelSinglePage = () => {
     const { id } = useParams()
@@ -48,6 +50,10 @@ const TravelSinglePage = () => {
                 onClick={handleDelete}
             >
             </Button>
+
+            <CommentForm />
+
+            <CommentList />
         </div>
     );
 }

@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import cors from 'cors'
 import CategoryController from "./routers/category/category.controller";
 import CommentController from "./routers/comment/comment.controller";
@@ -13,6 +13,9 @@ app.use(cors({
     origin: 'http://localhost:5173'
 }))
 
+app.get('/', (req: Request, res: Response) => {
+  res.send('hello !');
+})
 
 app.use(loggerMiddle)
 app.use("/comments", CommentController)
